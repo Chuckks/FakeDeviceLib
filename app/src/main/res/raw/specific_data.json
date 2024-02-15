@@ -1,0 +1,91 @@
+{
+  "icc": [
+    {}
+  ],
+  "paypass": [
+    {
+      "name": "CTLS_CARD_DATA_INPUT_CAPABILITY",
+      "tag": "DF8117",
+      "value": "60"
+    },
+    {
+      "name": "CTLS_CVM_CAPABILITY",
+      "tag": "DF8118",
+      "value": "60"
+    },
+    {
+      "name": "CTLS_NO_CVM_CAPABILITY",
+      "tag": "DF8119",
+      "value": "08"
+    },
+    {
+      "name": "CTLS_SECURITY_CAPABILITY",
+      "tag": "DF811F",
+      "value": "C8"
+    },
+    {
+      "name": "CTLS_MAG_STRIPE_CVM_CAPABILITY",
+      "tag": "DF811E",
+      "value": "00"
+    },
+    {
+      "name": "CTLS_MAG_STRIPE_NO_CVM_CAPABILITY",
+      "tag": "DF812C",
+      "value": "00"
+    },
+    {
+      "name": "CTLS_KERNEL_CONFIGURATION",
+      "tag": "DF811B",
+      "value": "B0"
+    },
+    {
+      "name": "CTLS_MAX_NUMBER_TRANS_LOG",
+      "tag": "DF811D",
+      "value": "02"
+    }
+  ],
+  "paywave": [
+    {
+      "name": "TERM_TTQ",
+      "tag": "9F66",
+      "value": "B7E04000"
+    }
+  ],
+  "expresspay": [
+    {
+      "name": "CTlS_READER_CAPABILITY",
+      "tag": "9F6D",
+      "value": "C8"
+    },
+    {
+      "name": "CTlS_ENHANCED_READER_CAPABILITY",
+      "tag": "9F6E",
+      "value": "D8E40000"
+    },
+    {
+      "name": "SUNMI_SUPPORT_DELAYED_AUTH",
+      "tag": "DF8168",
+      "value": "00"
+    },
+    {
+      "name": "SUNMI_DRL_SETS",
+      "tag": "DF8167",
+      "value": "00"
+    },
+    {
+      "name": "SUNMI_UNABLE_GO_ONLINE",
+      "tag": "DF8169",
+      "value": "00"
+    },
+    {
+      "name": "SUNMI_UN_RANGE",
+      "tag": "DF8170",
+      "value": "60"
+    },
+    {
+      "name": "SUNMI_CTLS_READER_CAPABILITIES",
+      "tag": "9F6D",
+      "value": "C8"
+    }
+  ]
+}
