@@ -9,7 +9,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 29
+        minSdk = 28
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -42,8 +42,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
 
-    implementation ("com.github.Chuckks:UtilitiesLib:1.0.15")
-    implementation ("com.github.Chuckks:DeviceLib:1.0.10")
+    implementation ("com.github.Chuckks:UtilitiesLib:1.0.16")
+    implementation ("com.github.Chuckks:DeviceLib:1.0.14")
 }
 
 publishing {

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.bbva.fakedevicelib"
-        minSdk = 29
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -50,8 +50,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
     implementation(project(":FakeDeviceLib"))
-    implementation ("com.github.Chuckks:DeviceLib:1.0.10")
-    implementation ("com.github.Chuckks:UtilitiesLib:1.0.15")
+    implementation ("com.github.Chuckks:DeviceLib:1.0.14")
+    implementation ("com.github.Chuckks:UtilitiesLib:1.0.16")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
