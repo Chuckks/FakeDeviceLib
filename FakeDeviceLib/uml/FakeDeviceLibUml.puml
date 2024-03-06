@@ -1,0 +1,379 @@
+@startuml
+!define LIGHTORANGE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+
+class com.bbva.fakedevicelib.ExampleUnitTest {
++ void addition_isCorrect()
+}
+
+class com.bbva.fakedevicelib.device.physical.Printer {
++ Boolean bold
++ Boolean underline
++ IPrinter.EAlign align
++ IPrinter.EFont font
++ void barCode(String,IPrinter.EBarCode,Int,Int,Boolean)
++ void command(ByteArray)
++ void format(IPrinter.EFont,Boolean,IPrinter.EAlign)
++ void image(Bitmap)
++ void image(ByteArray)
++ void init()
++ Boolean isAvailable()
++ void lineFeed(Int)
++ void qrCode(String,Int)
++ void reset()
++ void text(String)
++ void textLine(String)
+}
+
+
+class com.bbva.fakedevicelib.device.emv.core.TransData {
+}
+class com.bbva.fakedevicelib.device.physical.Card {
++  present
++ String data
++  step
++  type
++ void cancelCheckCard()
++ void cardOff()
++ Boolean checkCard(CardConfig)
++ void isAvailable()
++ void isPresent()
+}
+
+
+class com.bbva.fakedevicelib.device.emv.core.ProcessData {
++  inputData
++  outputData
++ IEmvProcessView emvView
++ IPinpad.EResult capturePinpad(Boolean)
+}
+
+
+class com.bbva.fakedevicelib.device.physical.Hsm {
++ ByteArray decrypt(Int,IHsm.EEncryptMode,ByteArray,ByteArray)
++ ByteArray encrypt(Int,IHsm.EEncryptMode,ByteArray,ByteArray)
++ ByteArray getKCV(Int)
++ void injectClearKey(IHsm.EKeyType,SecretKey,Int)
++ void injectEncryptedKey(IHsm.EKeyType,Int,SecretKey,Int)
++ Boolean isAvailable()
+}
+
+class com.bbva.fakedevicelib.device.emv.core.TransactProcess {
+- List<Application> listCandidates
++ void start()
+}
+
+
+class com.bbva.fakedevicelib.FakeConfig {
++ ICard.EType cardDetected
++ Boolean multiApp
++ Boolean cvmSignature
++ Boolean cvmPin
++ Boolean cardRefuse
++ IEmvProcess.EResult txResult
++ IEmvProcess.EError error
++ IPinpad.EResult pinpadResult
++ Tvr tvr
++ Tsi tsi
+}
+
+class com.bbva.fakedevicelib.FakeDeviceCenter {
+-  manager
++ ILed led
++ IInfo info
++ IPower power
++ IScan scan
++ IPrinter printer
++ IScreen screen
++ IPinpad pinpad
++ ISound sound
++ ICard card
++ IHsm hsm
++ IPermissions permissions
++ IEmvConfig emvConfig
++ IEmvProcess emvProcess
++ ISoftwareInstall softwareInstall
++ IComms comm
++ void connect()
++ void disconnect()
++ void isConnected()
+}
+
+
+interface com.bbva.fakedevicelib.device.emv.core.IEmvListener {
++ void onWaitAppSelect(List<Application>?,Boolean)
++ void onAppFinalSelect(String?)
++ void onConfirmCardNo(String?)
++ void onRequestShowPinPad(Int,Int)
++ void onRequestSignature()
++ void onCertVerify(Int,String?)
++ void onOnlineProc()
++ void onCardDataExchangeComplete()
++ void onTransResult(IEmvProcess.EResult,String?)
++ void onConfirmationCodeVerified()
++ void onRequestDataExchange(String?)
++ void onTermRiskManagement()
+}
+
+class com.bbva.fakedevicelib.device.emv.EmvProcess {
++  outputData
+- ICardProcess cardProcess
++ void init(IEmvProcessView)
++ void isAvailable()
++ Boolean isInit()
+- void removeCard()
++ void stop()
++ Boolean start(InputData)
++ void confirmTrxData(Boolean)
++ void isSignatureCaptured(Boolean)
++ void setSelectApp(Int)
+}
+
+
+class com.bbva.fakedevicelib.device.physical.Permissions {
++ void getAllPermissions()
+}
+
+class com.bbva.fakedevicelib.device.physical.Scanner {
++ String getResult()
++ Boolean isAvailable()
++ void start()
++ void stop()
+}
+
+interface com.bbva.fakedevicelib.device.emv.core.ICardProcess {
++ Boolean init()
++ Boolean start()
++ void setSelectApp(Int)
++ void confirmTrxData(Boolean)
++ void isSignatureCaptured(Boolean)
++ void stop()
+}
+
+class com.bbva.fakedevicelib.device.emv.EmvConfig$ECheckConfig$Companion {
++ void isCapkLoaded(Int)
++ void isAidLoaded(Int)
+}
+
+enum com.bbva.fakedevicelib.device.emv.EmvConfig$ECheckConfig {
++  FAIL
++  SUCCESS
++  ONLY_AID
++  ONLY_CAPK
+}
+
+class com.bbva.fakedevicelib.device.emv.EmvConfig$Companion {
++ MutableList<AidData> aidsList
++ MutableList<CapkData> capkList
++ TerminalParam terminalParam
++  specificConfigMap
++  loadConfig
+}
+
+class com.bbva.fakedevicelib.device.emv.EmvConfig {
++ void setSpecificConfig(IEmvConfig.EType,TlvList)
++ void setSpecificConfig(HashMap<IEmvConfig.EType, TlvList>)
+- Boolean setTerminalData(TerminalParam)
+- Boolean addCapk(CapkData)
+- void addCapks(List<CapkData>)
+- void cleanCapks()
++ void isCapksLoaded()
+- Boolean addAid(AidData)
+- void addAids(List<AidData>)
++ void isAidsLoaded()
++ void isAvailable()
+- void cleanAids()
++ Boolean clean()
++ Boolean setConfig(TerminalParam,List<AidData>,List<CapkData>)
+- void setTermParam()
+- void deleteDrlLimit()
+- void addDrlLimit(DrlData)
++ void isEmpty()
+}
+
+class com.bbva.fakedevicelib.Manager {
+-  connected
++ Boolean connect(Context)
++ Boolean disconnect(Context)
++ void isConnected()
+}
+
+
+class com.bbva.fakedevicelib.ExampleInstrumentedTest {
++ void useAppContext()
+}
+
+class com.bbva.fakedevicelib.device.physical.Power {
++ void reboot()
++ void savingPower()
++ void shutdown()
++ void sleep()
+}
+
+class com.bbva.fakedevicelib.device.physical.Info {
+- String translateType(IInfo.EType)
++ void getInfo(IInfo.EType)
+}
+
+class com.bbva.fakedevicelib.device.physical.Screen {
++ void setExclusiveMode(Boolean)
++ void setDropDown(Boolean)
++ void setNavigationVisibility(Boolean)
++ void hideNavigationItems(IScreen.ENavigator)
+- Int getNavigatorId(IScreen.ENavigator)
+- Int getPosition(IScreen.EPosition)
+}
+
+class com.bbva.fakedevicelib.FakeDeviceCenterCreator {
++ IDeviceCenter create(Context)
+}
+
+class com.bbva.fakedevicelib.device.physical.Pinpad {
++  pinpadData
++  pinpadTextData
+-  pinblock
++ void capture(String,(result: IPinpad.EResult) -> Unit)
++ void config(PinpadData)
++ void config(PinpadData,PinpadText)
++ void config(PinpadText)
++ String getPinBlock()
++ Boolean isAvailable()
+}
+
+
+enum com.bbva.fakedevicelib.device.emv.core.EmvListener$EStep {
++  NOT_INIT
++  WAIT_APP_SELECT
++  APP_FINAL_SELECT
++  CONFIRM_CARD_NO
++  REQUEST_SHOW_PINPAD
++  REQUEST_SIGNATURE
++  TERMINAL_RISK_MANAGER
++  CERT_VERIFY
++  ONLINE_PROC
++  CARD_DATA_EXCHANGE_COMPLETE
++  CONFIRMATION_CODE_VERIFIED
++  REQUEST_DATA_EXCHANGE
++  TRANS_RESULT
++  FINAL_PROCESS
+}
+
+class com.bbva.fakedevicelib.device.emv.core.EmvListener {
++  step
++  result
++ Boolean confirm
++ ((selected: Int) -> Unit)? appSelected
+- HostResponseData response
+-  tsi
+-  tvr
+- void transactionInfo()
+- void stepStatusInfo()
+- Int emptyCandidateList()
+- Int onlyOneApplication(List<Application>)
+- Int userSelectApplication(List<Application>)
+- String getPreferredName(Application)
++ void onWaitAppSelect(List<Application>?,Boolean)
+- Boolean statusError(String)
++ void onAppFinalSelect(String?)
+- Boolean checkPartialGrade()
+- OutputData fillOutputData()
++ void onConfirmCardNo(String?)
++ void onRequestShowPinPad(Int,Int)
++ void onRequestSignature()
++ void onCertVerify(Int,String?)
++ void onOnlineProc()
++ void onCardDataExchangeComplete()
++ void onTransResult(IEmvProcess.EResult,String?)
++ void onConfirmationCodeVerified()
++ void onRequestDataExchange(String?)
++ void onTermRiskManagement()
+}
+
+
+abstract class com.bbva.fakedevicelib.utilities.ReadConfig {
+# List<AidData> readAidList()
+# List<CapkData> readCapkList()
+# HashMap<IEmvConfig.EType, TlvList> readSpecificConfig()
+# TerminalParam readTerminalParams()
++ void load(Boolean)
+}
+
+class com.bbva.fakedevicelib.device.physical.Led {
+-  colorOnArray
+- void setColor(ILed.EColor,Boolean)
++ Boolean isAvailable()
++ Boolean isColorOn(ILed.EColor)
++ void switch()
++ void switchLight(ILed.EColor)
++ void switchLights(ILed.EColor)
++ void turnOn(ILed.EColor)
++ void turnOff(ILed.EColor)
++ void turnOffAllLights()
++ void turnOffLights(ILed.EColor)
++ void turnOnAllLights()
++ void turnOnLights(ILed.EColor)
+}
+
+
+class com.bbva.fakedevicelib.device.physical.Sound {
++ void infoBeep()
++ void errorBeep()
++ void successBeep()
++ void warningBeep()
++ void custom(Int,Int,Int,Int)
++ void isAvailable()
+}
+
+class com.bbva.fakedevicelib.device.emv.core.IccProcess {
+-  emvListener
++ void init()
++ void stop()
++ Boolean start()
++ void setSelectApp(Int)
++ void confirmTrxData(Boolean)
++ void isSignatureCaptured(Boolean)
+}
+
+
+class com.bbva.fakedevicelib.device.emv.core.MagProcess {
+-  requiredPin
+-  cardData
++ void init()
++ Boolean start()
++ void setSelectApp(Int)
++ void confirmTrxData(Boolean)
++ void isSignatureCaptured(Boolean)
++ void stop()
+- Boolean capturePin()
+- Boolean checkPinOption()
+- void fillOutputData()
+}
+
+
+
+
+com.bbva.devicelib.physical.IPrinter <|.. com.bbva.fakedevicelib.device.physical.Printer
+com.bbva.devicelib.physical.ICard <|.. com.bbva.fakedevicelib.device.physical.Card
+com.bbva.devicelib.physical.IHsm <|.. com.bbva.fakedevicelib.device.physical.Hsm
+com.bbva.devicelib.module.IDeviceCenter <|.. com.bbva.fakedevicelib.FakeDeviceCenter
+com.bbva.devicelib.emv.IEmvProcess <|.. com.bbva.fakedevicelib.device.emv.EmvProcess
+com.bbva.devicelib.physical.IPermissions <|.. com.bbva.fakedevicelib.device.physical.Permissions
+com.bbva.devicelib.physical.IScan <|.. com.bbva.fakedevicelib.device.physical.Scanner
+com.bbva.fakedevicelib.device.emv.ECheckConfig +.. com.bbva.fakedevicelib.device.emv.ECheckConfig$Companion
+com.bbva.fakedevicelib.device.emv.EmvConfig$ECheckConfig +.. com.bbva.fakedevicelib.device.emv.EmvConfig$ECheckConfig$Companion
+com.bbva.fakedevicelib.device.emv.EmvConfig +.. com.bbva.fakedevicelib.device.emv.EmvConfig$ECheckConfig
+com.bbva.fakedevicelib.device.emv.EmvConfig +.. com.bbva.fakedevicelib.device.emv.EmvConfig$Companion
+com.bbva.devicelib.emv.IEmvConfig <|.. com.bbva.fakedevicelib.device.emv.EmvConfig
+com.bbva.devicelib.connection.ISdkConnect <|.. com.bbva.fakedevicelib.Manager
+com.bbva.devicelib.physical.IPower <|.. com.bbva.fakedevicelib.device.physical.Power
+com.bbva.devicelib.physical.IInfo <|.. com.bbva.fakedevicelib.device.physical.Info
+com.bbva.devicelib.physical.IScreen <|.. com.bbva.fakedevicelib.device.physical.Screen
+com.bbva.devicelib.module.IDeviceCenterCreator <|.. com.bbva.fakedevicelib.FakeDeviceCenterCreator
+com.bbva.devicelib.physical.IPinpad <|.. com.bbva.fakedevicelib.device.physical.Pinpad
+com.bbva.fakedevicelib.device.emv.core.EmvListener +.. com.bbva.fakedevicelib.device.emv.core.EmvListener$EStep
+com.bbva.fakedevicelib.device.emv.core.IEmvListener <|.. com.bbva.fakedevicelib.device.emv.core.EmvListener
+com.bbva.devicelib.physical.ILed <|.. com.bbva.fakedevicelib.device.physical.Led
+com.bbva.devicelib.physical.ISound <|.. com.bbva.fakedevicelib.device.physical.Sound
+com.bbva.fakedevicelib.device.emv.core.ICardProcess <|.. com.bbva.fakedevicelib.device.emv.core.IccProcess
+com.bbva.fakedevicelib.device.emv.core.ICardProcess <|.. com.bbva.fakedevicelib.device.emv.core.MagProcess
+@enduml
